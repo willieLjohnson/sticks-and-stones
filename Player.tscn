@@ -17,3 +17,8 @@ shape = SubResource( 1 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 
 [node name="Camera" type="Camera" parent="Head"]
+
+[node name="HeadBonker" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37566, 0 )
+enabled = true
+cast_to = Vector3( 0, 1, 0 )

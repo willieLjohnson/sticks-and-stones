@@ -21,6 +21,7 @@ var fall = Vector3()
 
 onready var head = $Head
 onready var pcap = $CollisionShape
+onready var bonker = $HeadBonker
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -32,9 +33,13 @@ func _input(event: InputEvent) -> void:
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
 func _process(delta: float) -> void:
+	var head_bonked = false
 	speed = default_move_speed
 	
 	direction = Vector3()
+	
+	if bonker.is_colliding():
+		head_bonked = true
 		
 	if not is_on_floor():
 		fall.y -= gravity * delta
@@ -49,6 +54,9 @@ func _process(delta: float) -> void:
 			fall.y = jump
 			jump_num = 2
 		
+	if head_bonked:
+		fall.y = -2
+		
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
@@ -56,7 +64,7 @@ func _process(delta: float) -> void:
 	if Input.is_action_pressed("crouch"):
 		pcap.shape.height -= crouch_speed * delta
 		speed = crouch_move_speed
-	else:
+	elif not head_bonked:
 		pcap.shape.height += crouch_speed * delta
 	
 	pcap.shape.height = clamp(pcap.shape.height, crouch_height, default_height)
