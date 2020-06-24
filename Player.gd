@@ -25,21 +25,21 @@ func _input(event: InputEvent) -> void:
 func _process(delta: float) -> void:
 	direction = Vector3()
 	
-	if Input.is_action_just_pressed("ui_cancel"):
+	if Input.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-	if Input.is_action_just_pressed("move_forward"):
+	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
 		
-	elif Input.is_action_just_pressed("move_backward"):
+	elif Input.is_action_pressed("move_backward"):
 		direction += transform.basis.z
 	
-	if Input.is_action_just_pressed("move_left"):
+	if Input.is_action_pressed("move_left"):
 		direction -= transform.basis.x
 		
-	elif Input.is_action_just_pressed("move_right"):
+	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x
 
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
-	velocity = move_and_slide(velocity * speed)
+	velocity = move_and_slide(velocity, Vector3.UP)
