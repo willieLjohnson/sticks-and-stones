@@ -24,8 +24,14 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	direction = Vector3()
+		
+	if not is_on_floor():
+		fall.y -= gravity * delta
+		
+	if Input.is_action_just_pressed("jump"):
+		fall.y = jump
 	
-	if Input.is_action_pressed("ui_cancel"):
+	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if Input.is_action_pressed("move_forward"):
@@ -38,8 +44,9 @@ func _process(delta: float) -> void:
 		direction -= transform.basis.x
 		
 	elif Input.is_action_pressed("move_right"):
-		direction += transform.basis.x
+		direction += transform.basis.x 
 
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 	velocity = move_and_slide(velocity, Vector3.UP)
+	move_and_slide(fall, Vector3.UP)
