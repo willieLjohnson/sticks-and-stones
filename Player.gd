@@ -4,6 +4,7 @@ var speed = 7
 var acceleration = 20
 var gravity = 9.8
 var jump = 5
+var jump_num = 0
 
 var mouse_sensitivity = 0.05
 
@@ -27,10 +28,17 @@ func _process(delta: float) -> void:
 		
 	if not is_on_floor():
 		fall.y -= gravity * delta
+	else:
+		jump_num = 0
 		
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		fall.y = jump
-	
+	if Input.is_action_just_pressed("jump"):
+		if jump_num == 0 and is_on_floor():
+			fall.y = jump
+			jump_num = 1
+		elif jump_num == 1 and not is_on_floor():
+			fall.y = jump
+			jump_num = 2
+			
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
