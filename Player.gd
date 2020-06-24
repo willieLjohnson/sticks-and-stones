@@ -19,5 +19,5 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
-		rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
-		
+		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
+		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
