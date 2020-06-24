@@ -9,6 +9,7 @@
 [node name="Plane" parent="." instance=ExtResource( 2 )]
 
 [node name="Cube" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1.63467, 0, 0, 0, 0.462666, 0, 0, 0, 4.78839, -5.82066, 2.33202, 0 )
 
 [node name="Cube2" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15522, 1.21222, -14.4695 )
