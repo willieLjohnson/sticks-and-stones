@@ -21,3 +21,25 @@ func _input(event: InputEvent) -> void:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
+
+func _process(delta: float) -> void:
+	direction = Vector3()
+	
+	if Input.is_action_just_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if Input.is_action_just_pressed("move_forward"):
+		direction -= transform.basis.z
+		
+	elif Input.is_action_just_pressed("move_backward"):
+		direction += transform.basis.z
+	
+	if Input.is_action_just_pressed("move_left"):
+		direction -= transform.basis.x
+		
+	elif Input.is_action_just_pressed("move_right"):
+		direction += transform.basis.x
+
+	direction = direction.normalized()
+	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
+	velocity = move_and_slide(velocity * speed)
