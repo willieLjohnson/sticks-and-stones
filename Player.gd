@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 	if not is_on_floor():
 		fall.y -= gravity * delta
 		
-	if Input.is_action_just_pressed("jump"):
+	if Input.is_action_just_pressed("jump") and is_on_floor():
 		fall.y = jump
 	
 	if Input.is_action_just_pressed("ui_cancel"):
