@@ -14,8 +14,10 @@ var fall = Vector3()
 onready var head = $Head
 
 func _ready() -> void:
-	pass
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
+		rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
+		
