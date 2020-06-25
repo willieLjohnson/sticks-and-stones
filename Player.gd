@@ -18,10 +18,13 @@ var crouch_height = 0.5
 var mouse_sensitivity = 0.05
 
 var sprinting = false
+var grappling = false
+var hook_point_get = false
 
 var direction = Vector3()
 var velocity = Vector3()
 var fall = Vector3()
+var hook_point = Vector3()
 
 var damage = 100
 
@@ -30,7 +33,9 @@ onready var pcap = $CollisionShape
 onready var bonker = $HeadBonker
 onready var sprint_timer = $SprintTimer
 onready var aim_cast = $Head/Camera/AimCast
+onready var grapple_cast = $Head/Camera/GrappleCast
 onready var muzzle = $Head/Gun/Muzzle
+
 
 
 func _ready() -> void:
@@ -42,9 +47,29 @@ func _input(event: InputEvent) -> void:
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
+func grapple():
+	if Input.is_action_just_pressed("grapple"):
+		if grapple_cast.is_colliding():
+			if not grappling:
+				grappling = true
+	if grappling:
+		fall.y = 0
+		if not hook_point_get:
+			hook_point = grapple_cast.get_collision_point()
+			hook_point_get = true
+		if hook_point.distance_to(transform.origin) > 1:
+			if hook_point_get:
+				transform.origin = lerp(transform.origin, hook_point, 0.05)
+		else:
+			grappling = false
+			hook_point_get = false
+			
 func _physics_process(delta: float) -> void:
+	grapple()
+	
 	var head_bonked = false
 	speed = default_move_speed
+	
 	
 	direction = Vector3()
 	
