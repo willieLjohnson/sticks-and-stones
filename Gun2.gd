@@ -14,7 +14,6 @@ func shoot(aim_cast):
 		if aim_cast.is_colliding():
 			var bullet_instance = bullet.instance()
 			bullet_instance.damage = 10
-			bullet_instance.speed = 5
 			muzzle.add_child(bullet_instance)
 			bullet_instance.look_at(aim_cast.get_collision_point(), Vector3.UP)
 			bullet_instance.shoot = true
