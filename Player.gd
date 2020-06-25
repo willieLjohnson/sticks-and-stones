@@ -44,7 +44,6 @@ onready var wall_run_timer = $WallRunTimer
 onready var aim_cast = $Head/Camera/AimCast
 onready var grapple_cast = $Head/Camera/GrappleCast
 onready var muzzle = gun_1.get_node("Muzzle")
-onready var bullet = preload("res://Bullet.tscn")
 
 
 func _ready() -> void:
@@ -55,7 +54,20 @@ func _input(event: InputEvent) -> void:
 		rotate_y(deg2rad(-event.relative.x * mouse_sensitivity))
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
-
+	
+	if event is InputEventMouseButton:
+		if event.is_pressed():
+			if event.button_index == BUTTON_WHEEL_UP:
+				if current_weapon < 3:
+					current_weapon += 1
+				else:
+					current_weapon = 1
+			elif event.button_index == BUTTON_WHEEL_DOWN:
+				if current_weapon > 1:
+					current_weapon -= 1
+				else:
+					current_weapon = 3
+					
 func weapon_select():
 	if Input.is_action_just_pressed("weapon_1"):
 		current_weapon = 1
@@ -70,16 +82,19 @@ func weapon_select():
 			gun_2.visible = false
 			gun_3.visible = false
 			muzzle = gun_1.get_node("Muzzle")
+			gun_1.shoot(aim_cast)
 		2:
 			gun_1.visible = false
 			gun_2.visible = true
 			gun_3.visible = false
 			muzzle = gun_2.get_node("Muzzle")
+			gun_2.shoot(aim_cast)
 		3:
 			gun_1.visible = false
 			gun_2.visible = false
 			gun_3.visible = true
 			muzzle = gun_3.get_node("Muzzle")
+			gun_3.shoot(aim_cast)
 		
 func grapple():
 	if Input.is_action_just_pressed("grapple"):
@@ -152,13 +167,13 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-		
-	if Input.is_action_just_pressed("fire"):
-		if aim_cast.is_colliding():
-			var bullet_instance = bullet.instance()
-			muzzle.add_child(bullet_instance)
-			bullet_instance.look_at(aim_cast.get_collision_point(), Vector3.UP)
-			bullet_instance.shoot = true
+#
+#	if Input.is_action_just_pressed("fire"):
+#		if aim_cast.is_colliding():
+#			var bullet_instance = bullet.instance()
+#			muzzle.add_child(bullet_instance)
+#			bullet_instance.look_at(aim_cast.get_collision_point(), Vector3.UP)
+#			bullet_instance.shoot = true
 
 	if Input.is_action_pressed("crouch"):
 		pcap.shape.height -= crouch_speed * delta

@@ -16,3 +16,8 @@ script = ExtResource( 2 )
 
 [node name="Muzzle" parent="." index="0"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.02844 )
+
+[node name="AutoShootTimer" type="Timer" parent="." index="1"]
+wait_time = 0.05
+one_shot = true
+[connection signal="timeout" from="AutoShootTimer" to="." method="_on_AutoShootTimer_timeout"]
