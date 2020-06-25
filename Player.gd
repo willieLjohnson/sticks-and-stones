@@ -11,6 +11,7 @@ var jump = 5
 var jump_num = 0
 var blink_dist = 7
 
+
 var default_height = 1.5
 var crouch_height = 0.5
 
@@ -22,10 +23,14 @@ var direction = Vector3()
 var velocity = Vector3()
 var fall = Vector3()
 
+var damage = 100
+
 onready var head = $Head
 onready var pcap = $CollisionShape
 onready var bonker = $HeadBonker
 onready var sprint_timer = $SprintTimer
+onready var aim_cast = $Head/Camera/AimCast
+
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -42,6 +47,13 @@ func _process(delta: float) -> void:
 	
 	direction = Vector3()
 	
+	if Input.is_action_just_pressed("fire"):
+		if aim_cast.is_colliding():
+			var target = aim_cast.get_collider()
+			if target.is_in_group("Enemy"):
+				print("Hit enemy")
+				target.health -= damage
+				
 	if bonker.is_colliding():
 		head_bonked = true
 		
