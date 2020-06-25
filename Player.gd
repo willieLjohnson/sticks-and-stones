@@ -2,6 +2,7 @@ extends KinematicBody
 
 var speed
 var default_move_speed = 7
+var sprint_move_speed = 14
 var crouch_move_speed = 3
 var crouch_speed = 20
 var acceleration = 20
@@ -14,6 +15,8 @@ var default_height = 1.5
 var crouch_height = 0.5
 
 var mouse_sensitivity = 0.05
+
+var sprinting = false
 
 var direction = Vector3()
 var velocity = Vector3()
@@ -69,25 +72,24 @@ func _process(delta: float) -> void:
 	
 	pcap.shape.height = clamp(pcap.shape.height, crouch_height, default_height)
 	
+	
+	if Input.is_action_just_pressed("ability"):
+		sprinting = !sprinting
+	
+	if sprinting: speed = sprint_move_speed
+		
 	if Input.is_action_pressed("move_forward"):
 		direction -= transform.basis.z
-		if Input.is_action_just_pressed("ability"):
-			 translate(Vector3(0, 0, -blink_dist))
-		
+
 	elif Input.is_action_pressed("move_backward"):
 		direction += transform.basis.z
-		if Input.is_action_just_pressed("ability"):
-			 translate(Vector3(0, 0, blink_dist))
+
 		
 	if Input.is_action_pressed("move_left"):
 		direction -= transform.basis.x
-		if Input.is_action_just_pressed("ability"):
-			 translate(Vector3(-blink_dist, 0, 0))
 		
 	elif Input.is_action_pressed("move_right"):
 		direction += transform.basis.x 
-		if Input.is_action_just_pressed("ability"):
-			 translate(Vector3(blink_dist, 0, 0))
 				
 	direction = direction.normalized()
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
