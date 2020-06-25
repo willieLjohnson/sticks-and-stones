@@ -10,9 +10,10 @@ size = Vector3( 1, 1, 1 )
 [sub_resource type="BoxShape" id=3]
 extents = Vector3( 0.505, 0.5, 0.5 )
 
-[node name="Cube" type="CSGMesh"]
+[node name="Cube" type="MeshInstance"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -7.18535, 1.21222, 0 )
 mesh = SubResource( 2 )
+material/0 = null
 
 [node name="StaticBody" type="StaticBody" parent="."]
 
