@@ -65,9 +65,11 @@ transform = Transform( 1, 0, 0, 0, 0.462321, -0.886712, 0, 0.886712, 0.462321, 0
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.47161, 5.4081, -4.8007 )
+[node name="OmniLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, 1, 0, -1, -1.62921e-07, 0.418678, 10.5003, -4.8007 )
 light_energy = 6.45
+spot_range = 11.6
+spot_angle = 65.5
 
 [node name="MeshInstance" type="MeshInstance" parent="OmniLight"]
 mesh = SubResource( 3 )

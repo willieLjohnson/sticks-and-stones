@@ -15,3 +15,10 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="dummymale" parent="." instance=ExtResource( 2 )]
+
+[node name="RayCast" type="RayCast" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633308, 0.14712 )
+enabled = true
+cast_to = Vector3( 0, 0, 90 )
+
+[editable path="dummymale"]
