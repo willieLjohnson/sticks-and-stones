@@ -15,7 +15,7 @@ var blink_dist = 7
 var default_height = 1.5
 var crouch_height = 0.5
 
-var mouse_sensitivity = 0.05
+var mouse_sensitivity = 0.07
 
 var sprinting = false
 var grappling = false
@@ -39,7 +39,7 @@ onready var wall_run_timer = $WallRunTimer
 onready var aim_cast = $Head/Camera/AimCast
 onready var grapple_cast = $Head/Camera/GrappleCast
 onready var muzzle = $Head/Gun/Muzzle
-
+onready var bullet = preload("res://Bullet.tscn")
 
 
 func _ready() -> void:
@@ -124,15 +124,10 @@ func _physics_process(delta: float) -> void:
 		
 	if Input.is_action_just_pressed("fire"):
 		if aim_cast.is_colliding():
-			var bullet = get_world().direct_space_state
-			var collision = bullet.intersect_ray(muzzle.transform.origin, aim_cast.get_collision_point())
-			
-			if collision:
-				var target = collision.collider
-				if target.is_in_group("Enemy"):
-					print("Hit enemy")
-					target.health -= damage
-			
+			var bullet_instance = bullet.instance()
+			muzzle.add_child(bullet_instance)
+			bullet_instance.look_at(aim_cast.get_collision_point(), Vector3.UP)
+			bullet_instance.shoot = true
 
 	if Input.is_action_pressed("crouch"):
 		pcap.shape.height -= crouch_speed * delta

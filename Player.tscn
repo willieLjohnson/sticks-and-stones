@@ -6,14 +6,14 @@
 radius = 0.5
 height = 1.5
 
-[sub_resource type="SpatialMaterial" id=4]
+[sub_resource type="SpatialMaterial" id=2]
 albedo_color = Color( 0.121569, 0.121569, 0.121569, 1 )
 
-[sub_resource type="CubeMesh" id=2]
-material = SubResource( 4 )
+[sub_resource type="CubeMesh" id=3]
+material = SubResource( 2 )
 size = Vector3( 0.2, 0.2, 1 )
 
-[sub_resource type="CapsuleMesh" id=3]
+[sub_resource type="CapsuleMesh" id=4]
 radius = 0.5
 mid_height = 1.5
 
@@ -53,7 +53,7 @@ __meta__ = {
 
 [node name="Gun" type="MeshInstance" parent="Head"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, -0.326, -0.503 )
-mesh = SubResource( 2 )
+mesh = SubResource( 3 )
 material/0 = null
 
 [node name="Muzzle" type="Spatial" parent="Head/Gun"]
@@ -69,7 +69,7 @@ one_shot = true
 
 [node name="MeshInstance" type="MeshInstance" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
 
 [node name="WallRunTimer" type="Timer" parent="."]
