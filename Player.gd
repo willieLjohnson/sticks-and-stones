@@ -25,6 +25,7 @@ var fall = Vector3()
 onready var head = $Head
 onready var pcap = $CollisionShape
 onready var bonker = $HeadBonker
+onready var sprint_timer = $SprintTimer
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -75,6 +76,8 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("ability"):
 		sprinting = !sprinting
+		if sprinting:
+			sprint_timer.start()
 	
 	if sprinting: speed = sprint_move_speed
 		
@@ -95,3 +98,7 @@ func _process(delta: float) -> void:
 	velocity = velocity.linear_interpolate(direction * speed, acceleration * delta)
 	velocity = move_and_slide(velocity, Vector3.UP)
 	move_and_slide(fall, Vector3.UP, true)
+
+
+func _on_SprintTimer_timeout() -> void:
+	sprinting = false

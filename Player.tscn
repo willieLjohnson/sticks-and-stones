@@ -22,3 +22,8 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37566, 0 )
 enabled = true
 cast_to = Vector3( 0, 1, 0 )
+
+[node name="SprintTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+[connection signal="timeout" from="SprintTimer" to="." method="_on_SprintTimer_timeout"]
