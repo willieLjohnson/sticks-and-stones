@@ -9,16 +9,22 @@
 [node name="Plane" parent="." instance=ExtResource( 2 )]
 
 [node name="Cube" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1.63467, 0, 0, 0, 0.462666, 0, 0, 0, 4.78839, -5.82066, 2.33202, 0 )
+transform = Transform( 1.63467, 0, 0, 0, 0.462666, 0, 0, 0, 4.78839, -5.821, 2.22294, 0 )
 
 [node name="Cube2" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15522, 1.21222, -14.4695 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.155, 0.5, -14.469 )
 
 [node name="Cube3" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15522, 1.21222, 12.7154 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.155, 0.5, 12.715 )
+
+[node name="Cube5" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -5.77831, 0.985921, 1.72194 )
+
+[node name="Cube6" parent="." instance=ExtResource( 3 )]
+transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -5.869, 1, -1.851 )
 
 [node name="Cube4" parent="." instance=ExtResource( 3 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.813, 1.21222, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12.813, 0.5, 0 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00337219, 1.47248, -0.0308008 )
