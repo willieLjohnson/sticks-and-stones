@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Plane.tscn" type="PackedScene" id=2]
@@ -6,6 +6,15 @@
 [ext_resource path="res://Enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Wall.tscn" type="PackedScene" id=5]
 [ext_resource path="res://SkyBox.tscn" type="PackedScene" id=6]
+
+[sub_resource type="ProceduralSky" id=2]
+
+[sub_resource type="Environment" id=1]
+background_mode = 2
+background_sky = SubResource( 2 )
+background_energy = 2.0
+ambient_light_energy = 0.5
+glow_bloom = 0.07
 
 [node name="Game" type="Spatial"]
 
@@ -42,3 +51,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -5.549 )
 transform = Transform( 1, 0, 0, 0, 0.462321, -0.886712, 0, 0.886712, 0.462321, 0, 4.34406, 18.8452 )
 
 [node name="SkyBox" parent="." instance=ExtResource( 6 )]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 6.1098, 5.4081, -4.38531 )
