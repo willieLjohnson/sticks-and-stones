@@ -55,7 +55,7 @@ func grapple():
 	if grappling:
 		fall.y = 0
 		if not hook_point_get:
-			hook_point = grapple_cast.get_collision_point()
+			hook_point = grapple_cast.get_collision_point() + Vector3(0, 2.25, 0)
 			hook_point_get = true
 		if hook_point.distance_to(transform.origin) > 1:
 			if hook_point_get:
@@ -63,13 +63,17 @@ func grapple():
 		else:
 			grappling = false
 			hook_point_get = false
-			
+	if bonker.is_colliding():
+		grappling = false
+		hook_point = null
+		hook_point_get = false
+		global_translate(Vector3(0, -1, 0))
+		
 func _physics_process(delta: float) -> void:
 	grapple()
 	
 	var head_bonked = false
 	speed = default_move_speed
-	
 	
 	direction = Vector3()
 	

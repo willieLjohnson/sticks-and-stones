@@ -51,9 +51,8 @@ material/0 = null
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.51748 )
 
 [node name="HeadBonker" type="RayCast" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37566, 0 )
 enabled = true
-cast_to = Vector3( 0, 1, 0 )
+cast_to = Vector3( 0, 1.5, 0 )
 
 [node name="SprintTimer" type="Timer" parent="."]
 wait_time = 3.0

@@ -27,6 +27,9 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -5.869, 1, -1.851 )
 [node name="Cube4" parent="." instance=ExtResource( 3 )]
 transform = Transform( 1, 0, 0, 0, 13.2356, 0, 0, 0, 13.2356, 12.813, 6.36211, 0 )
 
+[node name="Cube7" parent="." instance=ExtResource( 3 )]
+transform = Transform( 13.236, 0, 0, 0, 1, 0, 0, 0, 13.236, 2.22086, 10.9313, 0 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00337219, 1.47248, -0.0308008 )
 
