@@ -1,10 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 1.5
+
+[sub_resource type="CubeMesh" id=2]
+size = Vector3( 0.2, 0.2, 1 )
 
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -22,7 +25,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0 )
 enabled = true
 cast_to = Vector3( 0, 0, -1000 )
 
-[node name="MeshInstance" type="MeshInstance" parent="Head"]
+[node name="Gun" type="MeshInstance" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, -0.326, -0.503 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="Muzzle" type="Spatial" parent="Head/Gun"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.591695 )
 
 [node name="HeadBonker" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.37566, 0 )

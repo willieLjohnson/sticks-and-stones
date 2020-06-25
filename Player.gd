@@ -30,6 +30,7 @@ onready var pcap = $CollisionShape
 onready var bonker = $HeadBonker
 onready var sprint_timer = $SprintTimer
 onready var aim_cast = $Head/Camera/AimCast
+onready var muzzle = $Head/Gun/Muzzle
 
 
 func _ready() -> void:
@@ -41,7 +42,7 @@ func _input(event: InputEvent) -> void:
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
-func _process(delta: float) -> void:
+func _physics_process(delta: float) -> void:
 	var head_bonked = false
 	speed = default_move_speed
 	
@@ -49,10 +50,14 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("fire"):
 		if aim_cast.is_colliding():
-			var target = aim_cast.get_collider()
-			if target.is_in_group("Enemy"):
-				print("Hit enemy")
-				target.health -= damage
+			var bullet = get_world().direct_space_state
+			var collision = bullet.intersect_ray(muzzle.transform.origin, aim_cast.get_collision_point())
+			
+			if collision:
+				var target = collision.collider
+				if target.is_in_group("Enemy"):
+					print("Hit enemy")
+					target.health -= damage
 				
 	if bonker.is_colliding():
 		head_bonked = true
