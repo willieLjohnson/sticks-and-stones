@@ -36,9 +36,9 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00337219, 1.47248, -0.030800
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.820091, 1.04372, 7.55388 )
 
 [node name="Wall" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.62872, -5.54904 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -5.549 )
 
 [node name="Wall2" parent="." instance=ExtResource( 5 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 14.6393, -5.54904 )
+transform = Transform( 1, 0, 0, 0, 0.462321, -0.886712, 0, 0.886712, 0.462321, 0, 4.34406, 18.8452 )
 
 [node name="SkyBox" parent="." instance=ExtResource( 6 )]

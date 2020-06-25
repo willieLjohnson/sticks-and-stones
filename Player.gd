@@ -31,14 +31,19 @@ var damage = 100
 var wall_normal
 var can_wallrun = false
 
+var current_weapon = 1
+
 onready var head = $Head
+onready var gun_1 = $Head/Hand/Gun
+onready var gun_2 = $Head/Hand/Gun2
+onready var gun_3 = $Head/Hand/Gun3
 onready var pcap = $CollisionShape
 onready var bonker = $HeadBonker
 onready var sprint_timer = $SprintTimer
 onready var wall_run_timer = $WallRunTimer
 onready var aim_cast = $Head/Camera/AimCast
 onready var grapple_cast = $Head/Camera/GrappleCast
-onready var muzzle = $Head/Gun/Muzzle
+onready var muzzle = gun_1.get_node("Muzzle")
 onready var bullet = preload("res://Bullet.tscn")
 
 
@@ -51,6 +56,31 @@ func _input(event: InputEvent) -> void:
 		head.rotate_x(deg2rad(-event.relative.y * mouse_sensitivity))
 		head.rotation.x = clamp(head.rotation.x, deg2rad(-90), deg2rad(90))
 
+func weapon_select():
+	if Input.is_action_just_pressed("weapon_1"):
+		current_weapon = 1
+	elif Input.is_action_just_pressed("weapon_2"):
+		current_weapon = 2
+	elif Input.is_action_just_pressed("weapon_3"):
+		current_weapon = 3
+	
+	match(current_weapon):
+		1:
+			gun_1.visible = true
+			gun_2.visible = false
+			gun_3.visible = false
+			muzzle = gun_1.get_node("Muzzle")
+		2:
+			gun_1.visible = false
+			gun_2.visible = true
+			gun_3.visible = false
+			muzzle = gun_2.get_node("Muzzle")
+		3:
+			gun_1.visible = false
+			gun_2.visible = false
+			gun_3.visible = true
+			muzzle = gun_3.get_node("Muzzle")
+		
 func grapple():
 	if Input.is_action_just_pressed("grapple"):
 		if grapple_cast.is_colliding():
@@ -103,6 +133,7 @@ func _physics_process(delta: float) -> void:
 	
 	grapple()
 	wall_run()
+	weapon_select()
 		
 	if Input.is_action_just_pressed("jump"):
 		if jump_num == 0 and is_on_floor():

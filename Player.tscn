@@ -1,24 +1,29 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Player.gd" type="Script" id=1]
+[ext_resource path="res://Gun1.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Gun3.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Gun2.tscn" type="PackedScene" id=4]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 0, 0.811765, 1, 1 )
+
+[sub_resource type="CapsuleMesh" id=4]
+material = SubResource( 5 )
+radius = 0.5
+mid_height = 1.5
 
 [sub_resource type="CapsuleShape" id=1]
 radius = 0.5
 height = 1.5
 
-[sub_resource type="SpatialMaterial" id=2]
-albedo_color = Color( 0.121569, 0.121569, 0.121569, 1 )
-
-[sub_resource type="CubeMesh" id=3]
-material = SubResource( 2 )
-size = Vector3( 0.2, 0.2, 1 )
-
-[sub_resource type="CapsuleMesh" id=4]
-radius = 0.5
-mid_height = 1.5
-
 [node name="Player" type="KinematicBody"]
 script = ExtResource( 1 )
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
+mesh = SubResource( 4 )
+material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
@@ -51,13 +56,14 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Gun" type="MeshInstance" parent="Head"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.32, -0.326, -0.503 )
-mesh = SubResource( 3 )
-material/0 = null
+[node name="Hand" type="Spatial" parent="Head"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.33057, -0.220223, -0.637775 )
 
-[node name="Muzzle" type="Spatial" parent="Head/Gun"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.51748 )
+[node name="Gun" parent="Head/Hand" instance=ExtResource( 2 )]
+
+[node name="Gun2" parent="Head/Hand" instance=ExtResource( 4 )]
+
+[node name="Gun3" parent="Head/Hand" instance=ExtResource( 3 )]
 
 [node name="HeadBonker" type="RayCast" parent="."]
 enabled = true
@@ -66,11 +72,6 @@ cast_to = Vector3( 0, 1.5, 0 )
 [node name="SprintTimer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -1.62921e-07, -1, 0, 1, -1.62921e-07, 0, 0, 0 )
-mesh = SubResource( 4 )
-material/0 = null
 
 [node name="WallRunTimer" type="Timer" parent="."]
 wait_time = 2.5
