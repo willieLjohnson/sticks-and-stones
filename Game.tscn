@@ -46,13 +46,13 @@ transform = Transform( 1, 0, 0, 0, 2, 0, 0, 0, 1, -19.2092, 2.31195, 19.3145 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00337219, 1.47248, 9.51652 )
 
 [node name="Enemy" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.962431, 2.04777, -3.92159 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -0.994698, 0, -3.93705 )
 
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -7.92406, 2.04777, -3.92159 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, -7.956, 0, -3.937 )
 
 [node name="Enemy3" parent="." instance=ExtResource( 4 )]
-transform = Transform( -1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.78172, 2.04777, -3.92159 )
+transform = Transform( -1, 0, -1.50996e-07, 0, 1, 0, 1.50996e-07, 0, -1, 7.74945, 0, -3.93705 )
 
 [node name="Wall" parent="." instance=ExtResource( 5 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, -5.549 )
