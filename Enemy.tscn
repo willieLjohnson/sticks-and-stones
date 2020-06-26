@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Enemy.gd" type="Script" id=1]
 [ext_resource path="res://dummymale.tscn" type="PackedScene" id=2]
 
 [sub_resource type="BoxShape" id=1]
 extents = Vector3( 0.5, 1.9764, 0.5 )
+
+[sub_resource type="SphereShape" id=2]
+radius = 20.0
 
 [node name="Enemy" type="KinematicBody" groups=[
 "Enemy",
@@ -15,10 +18,20 @@ script = ExtResource( 1 )
 shape = SubResource( 1 )
 
 [node name="dummymale" parent="." instance=ExtResource( 2 )]
+transform = Transform( -1, 0, -3.25841e-07, 0, 1, 0, 3.25841e-07, 0, -1, 0, 0, 0 )
 
 [node name="RayCast" type="RayCast" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633308, 0.14712 )
 enabled = true
-cast_to = Vector3( 0, 0, 90 )
+cast_to = Vector3( 0, 0, -90 )
+
+[node name="SightRange" type="Area" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="SightRange"]
+shape = SubResource( 2 )
+
+[node name="Eyes" type="Spatial" parent="."]
+[connection signal="body_entered" from="SightRange" to="." method="_on_SightRange_body_entered"]
+[connection signal="body_exited" from="SightRange" to="." method="_on_SightRange_body_exited"]
 
 [editable path="dummymale"]
